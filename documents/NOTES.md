@@ -10,3 +10,6 @@
 - Repository Interface
     - @Repository
     - extends JpaRepository<Model, ID Type>
+  
+- Test Rollback
+    - @Transactional
