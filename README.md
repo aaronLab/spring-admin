@@ -1,3 +1,10 @@
 # Spring Admin Example
 
-- inspired by [FastCampus](https://www.fastcampus.co.kr/)
+Admin Example with Spring Boot 
+
+### Index
+
+- [ENTITY](./documents/ENTITY.md)
+- [REPOSITORY](./documents/REPOSITORY.md)
+
+inspired by [FastCampus](https://www.fastcampus.co.kr/)
