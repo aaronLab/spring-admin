@@ -36,8 +36,20 @@ public class UserRepositoryTest extends AdminApplicationTests {
         });
     }
 
+    @Test
     public void update() {
+        Optional<User> user = userRepository.findById(2L);
 
+        user.ifPresent(foundUser -> {
+            System.out.println("found user: " + foundUser);
+
+            foundUser.setAccount("updated");
+            foundUser.setUpdatedAt(LocalDateTime.now());
+            foundUser.setUpdatedBy(foundUser.getAccount());
+
+            User newUser = userRepository.save(foundUser);
+            System.out.println("updated user: " + newUser);
+        });
     }
 
     public void delete() {
