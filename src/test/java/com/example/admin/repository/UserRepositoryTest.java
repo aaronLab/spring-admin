@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 public class UserRepositoryTest extends AdminApplicationTests {
 
@@ -25,8 +26,14 @@ public class UserRepositoryTest extends AdminApplicationTests {
         System.out.println("newUser: " + newUser);
     }
 
+    @Test
     public void read() {
+        Optional<User> user = userRepository.findById(2L);
 
+        user.ifPresent(foundUser -> {
+            System.out.println("user: " + foundUser);
+            System.out.println("email: " + foundUser.getEmail());
+        });
     }
 
     public void update() {
