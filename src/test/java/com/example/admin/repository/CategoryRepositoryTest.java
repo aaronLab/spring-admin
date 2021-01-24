@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 public class CategoryRepositoryTest extends AdminApplicationTests {
 
@@ -18,7 +19,7 @@ public class CategoryRepositoryTest extends AdminApplicationTests {
     @Transactional
     public void create() {
         String type = "COMPUTER";
-        String title = "COMPUTER";
+        String title = "Computer";
         LocalDateTime createdAt = LocalDateTime.now();
         String createdBy = "AdminServer";
 
@@ -37,7 +38,15 @@ public class CategoryRepositoryTest extends AdminApplicationTests {
 
     @Test
     public void read() {
+        Long id = 1L;
 
+        Optional<Category> optionalCategory = categoryRepository.findById(id);
+
+        optionalCategory.ifPresent(c -> {
+            System.out.println(c.getId());
+            System.out.println(c.getType());
+            System.out.println(c.getTitle());
+        });
     }
 
 }
