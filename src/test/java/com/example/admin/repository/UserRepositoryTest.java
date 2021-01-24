@@ -16,13 +16,14 @@ public class UserRepositoryTest extends AdminApplicationTests {
     private UserRepository userRepository;
 
     @Test
+    @Transactional
     public void create() {
         User user = new User();
-        user.setAccount("test03");
-        user.setEmail("test03@test.test");
-        user.setPhoneNumber("010-1111-3333");
+        user.setAccount("test user");
+        user.setEmail("test@test.test");
+        user.setPhoneNumber("010-1111-1111");
         user.setCreatedAt(LocalDateTime.now());
-        user.setCreatedBy("test03");
+        user.setCreatedBy("test user");
 
         User newUser = userRepository.save(user);
         System.out.println("newUser: " + newUser);
