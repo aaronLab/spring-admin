@@ -6,5 +6,6 @@ Admin Example with Spring Boot
 
 - [ENTITY](./documents/ENTITY.md)
 - [REPOSITORY](./documents/REPOSITORY.md)
+- [NOTES](./documents/NOTES.md)
 
 inspired by [FastCampus](https://www.fastcampus.co.kr/)
