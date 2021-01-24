@@ -21,8 +21,9 @@ public class OrderDetailRepositoryTest extends AdminApplicationTests {
         OrderDetail orderDetail = new OrderDetail();
 
         orderDetail.setOrderAt(LocalDateTime.now());
-        orderDetail.setItemId(1L);
-        orderDetail.setUserId(2L);
+
+//        orderDetail.setItemId(1L);
+//        orderDetail.setUserId(1L);
 
         OrderDetail newOrderDetail = orderDetailRepository.save(orderDetail);
 

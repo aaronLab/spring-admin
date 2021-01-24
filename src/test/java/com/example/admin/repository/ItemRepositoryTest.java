@@ -15,7 +15,6 @@ public class ItemRepositoryTest extends AdminApplicationTests {
     private ItemRepository itemRepository;
 
     @Test
-    @Transactional
     public void create() {
         Item item = new Item();
         item.setName("MacBook Pro");

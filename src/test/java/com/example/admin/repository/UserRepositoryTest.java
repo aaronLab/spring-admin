@@ -1,6 +1,8 @@
 package com.example.admin.repository;
 
 import com.example.admin.AdminApplicationTests;
+import com.example.admin.model.entity.Item;
+import com.example.admin.model.entity.OrderDetail;
 import com.example.admin.model.entity.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 public class UserRepositoryTest extends AdminApplicationTests {
@@ -16,7 +19,6 @@ public class UserRepositoryTest extends AdminApplicationTests {
     private UserRepository userRepository;
 
     @Test
-    @Transactional
     public void create() {
         User user = new User();
         user.setAccount("test user");
@@ -30,12 +32,16 @@ public class UserRepositoryTest extends AdminApplicationTests {
     }
 
     @Test
+    @Transactional
     public void read() {
         Optional<User> user = userRepository.findById(2L);
 
         user.ifPresent(foundUser -> {
-            System.out.println("user: " + foundUser);
-            System.out.println("email: " + foundUser.getEmail());
+
+            foundUser.getOrderDetailList().forEach(orderDetail -> {
+                Item item = orderDetail.getItem();
+                System.out.println(item);
+            });
         });
     }
 
