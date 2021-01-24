@@ -18,7 +18,7 @@ public class ItemRepositoryTest extends AdminApplicationTests {
     public void create() {
         Item item = new Item();
         item.setName("MacBook Pro");
-        item.setPrice(3000);
+//        item.setPrice(3000);
         item.setContent("Apple MacBook Pro");
 
         Item newItem = itemRepository.save(item);
