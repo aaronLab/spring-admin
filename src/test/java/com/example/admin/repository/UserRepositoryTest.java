@@ -16,12 +16,38 @@ public class UserRepositoryTest extends AdminApplicationTests {
     private UserRepository userRepository;
 
     @Test
+    @Transactional
     public void create() {
+        String account = "test01";
+        String password = "test01";
+        String status = "REGISTERED";
+        String email = "test01@test.test";
+        String phoneNumber = "010-0000-0000";
+        LocalDateTime registeredAt = LocalDateTime.now();
+        LocalDateTime createdAt = LocalDateTime.now();
+        String createdBy = "AdminServer";
+
+        User user = new User();
+        user.setAccount(account);
+        user.setPassword(password);
+        user.setStatus(status);
+        user.setEmail(email);
+        user.setPhoneNumber(phoneNumber);
+        user.setRegisteredAt(registeredAt);
+        user.setCreatedAt(createdAt);
+        user.setCreatedBy(createdBy);
+
+        User newUser = userRepository.save(user);
+
+        Assertions.assertNotNull(newUser);
     }
 
     @Test
-    @Transactional
     public void read() {
+        String phoneNumber = "010-0000-0000";
+
+        User user = userRepository.findFirstByPhoneNumberOrderByIdDesc(phoneNumber);
+        Assertions.assertNotNull(user);
     }
 
     @Test
