@@ -7,7 +7,9 @@
 |n vs 1|@ManyToOne|type change|
 |n vs n|@ManyToMany||
 
-@ToString: 연관 관계 설정 변수 exclude
+- Fetch type: LAZY = 지연(1:n), EAGER = 즉시(1:1)
+
+- @ToString: 연관 관계 설정 변수 exclude
 
 ### Workbench
 
