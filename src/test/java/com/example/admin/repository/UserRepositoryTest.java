@@ -51,10 +51,18 @@ public class UserRepositoryTest extends AdminApplicationTests {
 
         user.ifPresent(u -> {
             u.getOrderGroupList().forEach(orderGroup -> {
+                System.out.println("=============================================");
                 System.out.println("Price: " + orderGroup.getTotalPrice());
                 System.out.println("Quantity: " + orderGroup.getTotalQuantity());
                 System.out.println("Address" + orderGroup.getRevAddress());
                 System.out.println("Name: " + orderGroup.getRevName());
+                System.out.println("=============================================");
+
+                orderGroup.getOrderDetailList().forEach(orderDetail -> {
+                    System.out.println(orderDetail.getStatus());
+                    System.out.println(orderDetail.getArrivalDate());
+                    System.out.println("=============================================");
+                });
             });
         });
 
