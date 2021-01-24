@@ -38,11 +38,14 @@ public class CategoryRepositoryTest extends AdminApplicationTests {
 
     @Test
     public void read() {
-        Long id = 1L;
+        String type = "COMPUTER";
 
-        Optional<Category> optionalCategory = categoryRepository.findById(id);
+        Optional<Category> optionalCategory = categoryRepository.findByType(type);
 
         optionalCategory.ifPresent(c -> {
+
+            Assertions.assertEquals(c.getType(), type);
+
             System.out.println(c.getId());
             System.out.println(c.getType());
             System.out.println(c.getTitle());
