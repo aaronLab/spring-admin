@@ -43,11 +43,22 @@ public class UserRepositoryTest extends AdminApplicationTests {
     }
 
     @Test
+    @Transactional
     public void read() {
         String phoneNumber = "010-0000-0000";
 
-        User user = userRepository.findFirstByPhoneNumberOrderByIdDesc(phoneNumber);
-        Assertions.assertNotNull(user);
+        Optional<User> user = userRepository.findFirstByPhoneNumberOrderByIdDesc(phoneNumber);
+
+        user.ifPresent(u -> {
+            u.getOrderGroupList().forEach(orderGroup -> {
+                System.out.println("Price: " + orderGroup.getTotalPrice());
+                System.out.println("Quantity: " + orderGroup.getTotalQuantity());
+                System.out.println("Address" + orderGroup.getRevAddress());
+                System.out.println("Name: " + orderGroup.getRevName());
+            });
+        });
+
+        Assertions.assertTrue(user.isPresent());
     }
 
     @Test
