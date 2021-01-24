@@ -59,8 +59,12 @@ public class UserRepositoryTest extends AdminApplicationTests {
                 System.out.println("=============================================");
 
                 orderGroup.getOrderDetailList().forEach(orderDetail -> {
-                    System.out.println(orderDetail.getStatus());
-                    System.out.println(orderDetail.getArrivalDate());
+                    System.out.println("Partner: " + orderDetail.getItem().getPartner().getName());
+                    System.out.println("Category: " + orderDetail.getItem().getPartner().getCategory().getTitle());
+                    System.out.println("Item Name: " + orderDetail.getItem().getName());
+                    System.out.println("CS: " + orderDetail.getItem().getPartner().getCallCenter());
+                    System.out.println("Status: " + orderDetail.getStatus());
+                    System.out.println("Expected to get: " + orderDetail.getArrivalDate());
                     System.out.println("=============================================");
                 });
             });
