@@ -16,30 +16,38 @@ public class UserRepositoryTest extends AdminApplicationTests {
     private UserRepository userRepository;
 
     @Test
-    @Transactional
+//    @Transactional
     public void create() {
-        String account = "test01";
-        String password = "test01";
+        String account = "test03";
+        String password = "test03";
         String status = "REGISTERED";
-        String email = "test01@test.test";
-        String phoneNumber = "010-0000-0000";
+        String email = "test03@test.test";
+        String phoneNumber = "010-0000-1111";
         LocalDateTime registeredAt = LocalDateTime.now();
-        LocalDateTime createdAt = LocalDateTime.now();
-        String createdBy = "AdminServer";
+//        LocalDateTime createdAt = LocalDateTime.now();
+//        String createdBy = "AdminServer";
 
-        User user = new User();
-        user.setAccount(account);
-        user.setPassword(password);
-        user.setStatus(status);
-        user.setEmail(email);
-        user.setPhoneNumber(phoneNumber);
-        user.setRegisteredAt(registeredAt);
-        user.setCreatedAt(createdAt);
-        user.setCreatedBy(createdBy);
+//        User user = new User();
+//        user.setAccount(account);
+//        user.setPassword(password);
+//        user.setStatus(status);
+//        user.setEmail(email);
+//        user.setPhoneNumber(phoneNumber);
+//        user.setRegisteredAt(registeredAt);
 
-        User newUser = userRepository.save(user);
+        // BUILDER
+        User u = User.builder()
+                .account(account)
+                .password(password)
+                .status(status)
+                .email(email)
+                .phoneNumber(phoneNumber)
+                .registeredAt(registeredAt)
+                .build();
 
-        Assertions.assertNotNull(newUser);
+//        User newUser = userRepository.save(user);
+
+//        Assertions.assertNotNull(newUser);
     }
 
     @Test
@@ -48,6 +56,10 @@ public class UserRepositoryTest extends AdminApplicationTests {
         String phoneNumber = "010-0000-0000";
 
         Optional<User> user = userRepository.findFirstByPhoneNumberOrderByIdDesc(phoneNumber);
+
+//        user.ifPresent(u -> {
+//            u.setStatus("READING");
+//        });
 
         user.ifPresent(u -> {
             u.getOrderGroupList().forEach(orderGroup -> {
