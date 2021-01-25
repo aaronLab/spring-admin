@@ -2,13 +2,13 @@ package com.example.admin.ifs;
 
 import com.example.admin.model.network.Header;
 
-public interface CrudInterface {
+public interface CrudInterface<Req, Res> {
 
-    Header create(); // todo request obj
+    Header<Res> create(Req request); // todo request obj
 
-    Header read(Long id);
+    Header<Res> read(Long id);
 
-    Header update(Long id);
+    Header<Res> update(Req request);
 
     Header delete(Long id);
 

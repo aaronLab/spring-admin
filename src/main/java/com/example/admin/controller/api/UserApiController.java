@@ -2,27 +2,29 @@ package com.example.admin.controller.api;
 
 import com.example.admin.ifs.CrudInterface;
 import com.example.admin.model.network.Header;
+import com.example.admin.model.network.request.UserApiRequest;
+import com.example.admin.model.network.response.UserApiResponse;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/user")
-public class UserApiController implements CrudInterface {
+public class UserApiController implements CrudInterface<UserApiRequest, UserApiResponse> {
 
     @Override
     @PostMapping("")
-    public Header create() {
+    public Header<UserApiResponse> create(@RequestBody UserApiRequest userApiRequest) {
         return null;
     }
 
     @Override
     @GetMapping("{id}")
-    public Header read(@PathVariable Long id) {
+    public Header<UserApiResponse> read(@PathVariable Long id) {
         return null;
     }
 
     @Override
     @PutMapping("{id}")
-    public Header update(@PathVariable Long id) {
+    public Header<UserApiResponse> update(@RequestBody UserApiRequest request) {
         return null;
     }
 
