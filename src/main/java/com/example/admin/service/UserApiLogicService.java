@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class UserApiLogicService implements CrudInterface<UserApiRequest, UserApiResponse> {
@@ -38,12 +39,36 @@ public class UserApiLogicService implements CrudInterface<UserApiRequest, UserAp
 
     @Override
     public Header<UserApiResponse> read(Long id) {
-        return null;
+
+        return userRepository.findById(id)
+                .map(this::response)
+                .orElseGet(() -> Header.ERROR("no user data"));
     }
 
     @Override
     public Header<UserApiResponse> update(Header<UserApiRequest> request) {
-        return null;
+
+        UserApiRequest userApiRequest = request.getData();
+
+        Optional<User> optionalUser = userRepository.findById(userApiRequest.getId());
+
+        return optionalUser
+                .map(user -> {
+
+                    user
+                            .setAccount(userApiRequest.getAccount())
+                            .setPassword(userApiRequest.getPassword())
+                            .setStatus(userApiRequest.getStatus())
+                            .setPhoneNumber(userApiRequest.getPhoneNumber())
+                            .setEmail(userApiRequest.getEmail())
+                            .setRegisteredAt(user.getRegisteredAt())
+                            .setUnregisteredAt(user.getUnregisteredAt());
+
+                    return user;
+                })
+                .map(user -> userRepository.save(user))
+                .map(user -> response(user))
+                .orElseGet(() -> Header.ERROR("no user data"));
     }
 
     @Override
