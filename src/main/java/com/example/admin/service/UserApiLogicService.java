@@ -62,18 +62,27 @@ public class UserApiLogicService implements CrudInterface<UserApiRequest, UserAp
                             .setPhoneNumber(userApiRequest.getPhoneNumber())
                             .setEmail(userApiRequest.getEmail())
                             .setRegisteredAt(user.getRegisteredAt())
-                            .setUnregisteredAt(user.getUnregisteredAt());
+                            .setUnregisteredAt(userApiRequest.getUnregisteredAt());
 
                     return user;
                 })
                 .map(user -> userRepository.save(user))
-                .map(user -> response(user))
+                .map(this::response)
                 .orElseGet(() -> Header.ERROR("no user data"));
     }
 
     @Override
     public Header delete(Long id) {
-        return null;
+
+        Optional<User> optionalUser = userRepository.findById(id);
+
+        return optionalUser
+                .map(user -> {
+                    userRepository.delete(user);
+
+                    return Header.OK(user);
+                })
+                .orElseGet(() -> Header.ERROR("no user data"));
     }
 
     private Header<UserApiResponse> response(User user) {

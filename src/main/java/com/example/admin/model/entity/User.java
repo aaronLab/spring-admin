@@ -54,7 +54,7 @@ public class User {
 
     // User 1 : N OrderGroup
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private List<OrderGroup> orderGroupList;
 
 }
