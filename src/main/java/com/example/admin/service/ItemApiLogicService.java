@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -42,17 +43,50 @@ public class ItemApiLogicService implements CrudInterface<ItemApiRequest, ItemAp
 
     @Override
     public Header<ItemApiResponse> read(Long id) {
-        return null;
+        Optional<Item> optionalItem = itemRepository.findById(id);
+
+        return optionalItem
+                .map(this::response)
+                .orElseGet(() -> Header.ERROR("no item data"));
     }
 
     @Override
     public Header<ItemApiResponse> update(Header<ItemApiRequest> request) {
-        return null;
+
+        ItemApiRequest body = request.getData();
+
+        Optional<Item> optionalItem = itemRepository.findById(body.getId());
+
+        return optionalItem
+                .map(item -> {
+                    item
+                            .setStatus(body.getStatus())
+                            .setName(body.getStatus())
+                            .setTitle(body.getName())
+                            .setContent(body.getContent())
+                            .setPrice(body.getPrice())
+                            .setBrandName(body.getBrandName())
+                            .setUpdatedAt(LocalDateTime.now())
+                            .setPartner(partnerRepository.getOne(body.getPartnerId()));
+                    return item;
+                })
+                .map(itemRepository::save)
+                .map(this::response)
+                .orElseGet(() -> Header.ERROR("no item data"));
     }
 
     @Override
     public Header delete(Long id) {
-        return null;
+
+        Optional<Item> optionalItem = itemRepository.findById(id);
+
+        return optionalItem
+                .map(item -> {
+                    itemRepository.delete(item);
+
+                    return Header.OK(item);
+                })
+                .orElseGet(() -> Header.ERROR("no item data"));
     }
 
     private Header<ItemApiResponse> response(Item item) {
