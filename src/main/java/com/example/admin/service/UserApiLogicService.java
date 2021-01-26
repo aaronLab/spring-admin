@@ -66,7 +66,7 @@ public class UserApiLogicService implements CrudInterface<UserApiRequest, UserAp
 
                     return user;
                 })
-                .map(user -> userRepository.save(user))
+                .map(userRepository::save)
                 .map(this::response)
                 .orElseGet(() -> Header.ERROR("no user data"));
     }

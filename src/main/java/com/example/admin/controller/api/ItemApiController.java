@@ -5,6 +5,7 @@ import com.example.admin.ifs.CrudInterface;
 import com.example.admin.model.network.Header;
 import com.example.admin.model.network.request.ItemApiRequest;
 import com.example.admin.model.network.response.ItemApiResponse;
+import com.example.admin.service.ItemApiLogicService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,10 +14,12 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class ItemApiController implements CrudInterface<ItemApiRequest, ItemApiResponse> {
 
+    private final ItemApiLogicService itemApiLogicService;
+
     @Override
     @PostMapping("")
     public Header<ItemApiResponse> create(@RequestBody Header<ItemApiRequest> request) {
-        return null;
+        return itemApiLogicService.create(request);
     }
 
     @Override
