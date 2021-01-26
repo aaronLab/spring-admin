@@ -5,17 +5,17 @@ import com.example.admin.model.network.Header;
 import com.example.admin.model.network.request.UserApiRequest;
 import com.example.admin.model.network.response.UserApiResponse;
 import com.example.admin.service.UserApiLogicService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
 @RequestMapping("api/user")
+@RequiredArgsConstructor
 public class UserApiController implements CrudInterface<UserApiRequest, UserApiResponse> {
 
-    @Autowired
-    private UserApiLogicService userApiLogicService;
+    private final UserApiLogicService userApiLogicService;
 
     @Override
     @PostMapping("")
