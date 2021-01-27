@@ -22,6 +22,8 @@ public class OrderGroupApiResponse {
 
     private String revAddress;
 
+    private String revName;
+
     private String paymentType;
 
     private BigDecimal totalPrice;
